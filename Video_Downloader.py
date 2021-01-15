@@ -34,3 +34,6 @@ Download_Button.place(x = 423,y = 17,width=75,height=70)
 Show_information = tk.Text(window)
 Show_information.place(x = 70,y = 120,width=350,height=350)
 window.mainloop()
+
+#加入影片名稱
+#加入下方詳細清單
