@@ -4,9 +4,13 @@ import tkinter as tk
 import threading
 
 def Video_Download():
-    
-    ydl = youtube_dl.YoutubeDL({'outtmpl': 'file/%(title)s.mp4'})
-    ydl.download(['https://twitter.com/i/status/820467689164447745'])
+    get_url = video_url.get()
+    get_path = save_path.get()
+    if get_path == '':
+        get_path = 'Videos/'
+    ydl = youtube_dl.YoutubeDL({'format': 'bestaudio/best',
+                                'outtmpl': get_path + '%(title)s.mp4'})
+    ydl.download([get_url])
 
 def Thread_():
     t = threading.Thread(target=Video_Download)
