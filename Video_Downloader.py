@@ -13,6 +13,13 @@ def Video_Download():
     get_cookie = cookie.get()
     get_username = username.get()
     get_password = password.get()
+    ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
+                                    'embedthumnail': True,
+                                    'listformats': True,
+                                    'username': get_username,
+                                    'password': get_password
+                                    }).extract_info(get_url,download=False)
+    print(str(ydl_list).split(' '))
     if (get_video_name == '') & (get_extension == ''):
         ydl = youtube_dl.YoutubeDL({'format': 'bestvideo+bestaudio/best',
                                     'merge-output-format' : 'mp4',
@@ -28,6 +35,7 @@ def Video_Download():
                                     'outtmpl': get_path + get_video_name + get_extension,
                                     'cookiefile': get_cookie,
                                     'embedthumnail': True,
+                                    #'listformats': True,
                                     'username': get_username,
                                     'password': get_password
                                     })
@@ -36,6 +44,7 @@ def Video_Download():
                                     'outtmpl': get_path + '%(title)s' + get_extension,
                                     'cookiefile': get_cookie,
                                     'embedthumnail': True,
+                                    #'listformats': True,
                                     'username': get_username,
                                     'password': get_password
                                     })
@@ -44,6 +53,7 @@ def Video_Download():
                                     'outtmpl': get_path + get_video_name + '.%(ext)s',
                                     'cookiefile': get_cookie,
                                     'embedthumnail': True,
+                                    #'listformats': True,
                                     'username': get_username,
                                     'password': get_password
                                     })
@@ -70,7 +80,7 @@ def Thread_():
     t.start()
 
 window = tk.Tk()
-window.geometry('500x700')
+window.geometry('500x650')
 window.configure(bg='#3c4bb4')
 window.title("Video Downloader - created by hurosu")
 video_url_text = tk.Label(window,text = "URL : ",bg='#3c4bb4')
@@ -120,5 +130,6 @@ Show_information.insert('end','Example : VLC Media Player ( www.videolan.org )\n
 Show_information.see('end')
 
 window.mainloop()
+
 
 #listformats 選擇fotmat
