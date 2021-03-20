@@ -89,30 +89,52 @@ def Thread_():
     t.setDaemon(True)
     t.start()
 
+
+def copy(editor, event=None):
+    editor.event_generate("<<Copy>>")
+def cut(editor, event=None):
+    editor.event_generate("<<Cut>>")
+def paste(editor, event=None):
+    editor.event_generate("<<Paste>>")
+def rightKey(event, editor):
+    menubar.delete(0,tk.END)
+    menubar.add_command(label='複製',command=lambda:copy(editor))
+    menubar.add_command(label='剪下',command=lambda:cut(editor))
+    menubar.add_command(label='貼上',command=lambda:paste(editor))
+    menubar.post(event.x_root,event.y_root)
+
+
+
 window = tk.Tk()
 window.geometry('500x650')
 window.configure(bg='#3c4bb4')
 window.title("影片下載器 - 製作 by hurosu")
+menubar = tk.Menu(window,tearoff=False)
 video_url_text = tk.Label(window,text = "網址 : ",bg='#3c4bb4')
 video_url_text.place(x = 20,y = 13)
 video_url = tk.Entry(window)
 video_url.place(x = 70,y = 15,width=350,height=18)
+video_url.bind("<Button-3>", lambda x: rightKey(x, video_url))
 save_path_text = tk.Label(window,text="路徑 : ",bg='#3c4bb4')
 save_path_text.place(x = 20,y = 50)
 save_path = tk.Entry(window)
+save_path.bind("<Button-3>", lambda x: rightKey(x, save_path))
 save_path.insert(0, "影片/")
 save_path.place(x = 70,y = 50,width=350,height=18)
 Download_Button = tk.Button(window,text="下載",command = lambda:Thread_())
 Download_Button.place(x = 423,y = 17,width=75,height=70)
 video_name = tk.Entry(window)
+video_name.bind("<Button-3>", lambda x: rightKey(x, video_name))
 video_name.place(x = 70,y = 85,width=350,height=18)
 video_name_text = tk.Label(window,text="名稱 : ",bg='#3c4bb4')
 video_name_text.place(x = 20,y = 85)
 video_extension = tk.Entry(window)
+video_extension.bind("<Button-3>", lambda x: rightKey(x, video_extension))
 video_extension.place(x = 70,y = 120,width=350,height=18)
 video_extension_text = tk.Label(window,text="副檔名 : ",bg='#3c4bb4')
 video_extension_text.place(x = 20,y = 120)
 cookie = tk.Entry(window)
+cookie.bind("<Button-3>", lambda x: rightKey(x, cookie))
 cookie.place(x = 70,y = 150,width=350,height=18)
 cookie_text = tk.Label(window,text="Cookie : ",bg='#3c4bb4')
 cookie_text.place(x = 15 ,y = 150)
@@ -139,6 +161,7 @@ Show_information.insert('end','[!]有些影片需要用特殊軟體開啟\n')
 Show_information.insert('end','例如 : VLC Media Player ( www.videolan.org )\n\n')
 Show_information.insert('end','[!]目前測試可支援網站：Youtube、Twitter、抖音等\n')
 Show_information.see('end')
+Show_information.bind("<Button-3>", lambda x: rightKey(x, Show_information))
 
 window.mainloop()
 
