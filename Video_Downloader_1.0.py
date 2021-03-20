@@ -99,7 +99,7 @@ def cut(editor, event=None):
 def paste(editor, event=None):
     editor.event_generate("<<Paste>>")
 def clear(editor, event=None):
-    editor.delete( 0,tk.END) 
+    editor.delete(0,tk.END) 
 def rightKey(event, editor):
     menubar.delete(0,tk.END)
     menubar.add_command(label='Copy',command=lambda:copy(editor))
