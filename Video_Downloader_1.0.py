@@ -98,11 +98,14 @@ def cut(editor, event=None):
     editor.event_generate("<<Cut>>")
 def paste(editor, event=None):
     editor.event_generate("<<Paste>>")
+def clear(editor, event=None):
+    editor.delete( 0,tk.END) 
 def rightKey(event, editor):
     menubar.delete(0,tk.END)
     menubar.add_command(label='Copy',command=lambda:copy(editor))
     menubar.add_command(label='Cut',command=lambda:cut(editor))
     menubar.add_command(label='Paste',command=lambda:paste(editor))
+    menubar.add_command(label='clear',command=lambda:clear(editor))
     menubar.post(event.x_root,event.y_root)
 
 window = tk.Tk()
