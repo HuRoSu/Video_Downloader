@@ -13,13 +13,17 @@ def Video_Download():
     get_cookie = cookie.get()
     get_username = username.get()
     get_password = password.get()
-    ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
+    try:
+        ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
                                     'embedthumnail': True,
                                     'listformats': True,
                                     'username': get_username,
                                     'password': get_password
                                     }).extract_info(get_url,download=False)
-    print(str(ydl_list).split(' '))
+        print(str(ydl_list).split(' '))
+    except Exception:
+        Show_information.insert('end','網址不正確、無影片或不支援\n')
+        Show_information.see('end')
     if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):
         ydl = youtube_dl.YoutubeDL({
                                     'merge-output-format' : 'mp4',
@@ -165,7 +169,7 @@ Show_information.insert('end','[!]如果需要登入\n')
 Show_information.insert('end','可以使用Cookie或在帳號密碼內輸入帳號密碼\n\n')
 Show_information.insert('end','[!]有些影片需要用特殊軟體開啟\n')
 Show_information.insert('end','例如 : VLC Media Player ( www.videolan.org )\n\n')
-Show_information.insert('end','[+]目前測試可支援網站：Youtube、Twitter、抖音、Facebook\n')
+Show_information.insert('end','[+]目前測試可支援網站：Youtube、Twitter、抖音等\n')
 Show_information.see('end')
 Show_information.bind("<Button-3>", lambda x: rightKey(x, Show_information))
 
