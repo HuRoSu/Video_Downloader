@@ -165,7 +165,7 @@ Show_information.insert('end','[!]如果需要登入\n')
 Show_information.insert('end','可以使用Cookie或在帳號密碼內輸入帳號密碼\n\n')
 Show_information.insert('end','[!]有些影片需要用特殊軟體開啟\n')
 Show_information.insert('end','例如 : VLC Media Player ( www.videolan.org )\n\n')
-Show_information.insert('end','[!]目前測試可支援網站：Youtube、Twitter、抖音等\n')
+Show_information.insert('end','[+]目前測試可支援網站：Youtube、Twitter、抖音、Facebook\n')
 Show_information.see('end')
 Show_information.bind("<Button-3>", lambda x: rightKey(x, Show_information))
 
