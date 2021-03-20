@@ -13,13 +13,17 @@ def Video_Download():
     get_cookie = cookie.get()
     get_username = username.get()
     get_password = password.get()
-    ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
+    try:
+        ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
                                     'embedthumnail': True,
                                     'listformats': True,
                                     'username': get_username,
                                     'password': get_password
                                     }).extract_info(get_url,download=False)
-    print(str(ydl_list).split(' '))
+        print(str(ydl_list).split(' '))
+    except Exception:
+        Show_information.insert('end','URL error\n')
+        Show_information.see('end')
     if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):
         ydl = youtube_dl.YoutubeDL({
                                     'merge-output-format' : 'mp4',
