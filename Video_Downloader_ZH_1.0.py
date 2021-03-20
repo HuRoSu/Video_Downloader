@@ -99,11 +99,14 @@ def cut(editor, event=None):
     editor.event_generate("<<Cut>>")
 def paste(editor, event=None):
     editor.event_generate("<<Paste>>")
+def clear(editor, event=None):
+    editor.delete(0,tk.END)
 def rightKey(event, editor):
     menubar.delete(0,tk.END)
     menubar.add_command(label='複製',command=lambda:copy(editor))
     menubar.add_command(label='剪下',command=lambda:cut(editor))
     menubar.add_command(label='貼上',command=lambda:paste(editor))
+    menubar.add_command(label='清空',command=lambda:clear(editor))
     menubar.post(event.x_root,event.y_root)
 
 
