@@ -20,7 +20,17 @@ def Video_Download():
                                     'password': get_password
                                     }).extract_info(get_url,download=False)
     print(str(ydl_list).split(' '))
-    if (get_video_name == '') & (get_extension == ''):
+    if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):
+        ydl = youtube_dl.YoutubeDL({
+                                    'merge-output-format' : 'mp4',
+                                    'outtmpl': get_path + '%(title)s.%(ext)s',
+                                    'cookiefile': get_cookie,
+                                    'embedthumnail': True,
+                                    #'listformats': True,
+                                    'username': get_username,
+                                    'password': get_password
+                                    })
+    elif (get_video_name == '') & (get_extension == ''):
         ydl = youtube_dl.YoutubeDL({'format': 'bestvideo+bestaudio/best',
                                     'merge-output-format' : 'mp4',
                                     'outtmpl': get_path + '%(title)s.%(ext)s',
@@ -133,3 +143,4 @@ window.mainloop()
 
 
 #listformats 選擇fotmat
+#更新：Youtube影片可選擇畫質
