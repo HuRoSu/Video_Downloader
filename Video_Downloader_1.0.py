@@ -69,7 +69,10 @@ def Video_Download():
                                     })
     info = youtube_dl.YoutubeDL().extract_info(get_url,download=False)
     Show_information.insert('end','Title =' + info.get('title') + '\n')
-    Show_information.insert('end','Title =' + info.get('format') + '\n')
+    try:
+        Show_information.insert('end','Format =' + info.get('format') + '\n')
+    except TypeError:
+        pass
     Show_information.insert('end','Downloading...Waiting...\n')
     Show_information.see('end')
     if get_url == '':
