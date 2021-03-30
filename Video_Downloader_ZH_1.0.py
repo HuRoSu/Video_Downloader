@@ -13,6 +13,15 @@ def Video_Download():
     get_cookie = cookie.get()
     get_username = username.get()
     get_password = password.get()
+    ydl = youtube_dl.YoutubeDL({
+                                    'merge-output-format' : 'mp4',
+                                    'outtmpl': get_path + '%(title)s.%(ext)s',
+                                    'cookiefile': get_cookie,
+                                    'embedthumnail': True,
+                                    #'listformats': True,
+                                    'username': get_username,
+                                    'password': get_password
+                                    })
     try:
         ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
                                     'embedthumnail': True,
@@ -24,18 +33,10 @@ def Video_Download():
     except Exception:
         Show_information.insert('end','網址不正確、無影片或不支援\n')
         Show_information.see('end')
-    if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):
-        ydl = youtube_dl.YoutubeDL({
-                                    'merge-output-format' : 'mp4',
-                                    'outtmpl': get_path + '%(title)s.%(ext)s',
-                                    'cookiefile': get_cookie,
-                                    'embedthumnail': True,
-                                    #'listformats': True,
-                                    'username': get_username,
-                                    'password': get_password
-                                    })
-    elif (get_video_name == '') & (get_extension == ''):
-        ydl = youtube_dl.YoutubeDL({'format': 'bestvideo+bestaudio/best',
+#    if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):
+        
+    if (get_video_name == '') & (get_extension == ''):
+        ydl = youtube_dl.YoutubeDL({#'format': 'bestvideo+bestaudio/best',
                                     'merge-output-format' : 'mp4',
                                     'outtmpl': get_path + '%(title)s.%(ext)s',
                                     'cookiefile': get_cookie,
@@ -45,7 +46,7 @@ def Video_Download():
                                     'password': get_password
                                     })
     elif (get_video_name != '') & (get_extension != ''):
-        ydl = youtube_dl.YoutubeDL({'format': 'bestaudio/best',
+        ydl = youtube_dl.YoutubeDL({#'format': 'bestvideo+bestaudio/best',
                                     'outtmpl': get_path + get_video_name + get_extension,
                                     'cookiefile': get_cookie,
                                     'embedthumnail': True,
@@ -54,7 +55,7 @@ def Video_Download():
                                     'password': get_password
                                     })
     elif (get_video_name == '') & (get_extension != ''):
-        ydl = youtube_dl.YoutubeDL({'format': 'bestaudio/best',
+        ydl = youtube_dl.YoutubeDL({#'format': 'bestaudio/best',
                                     'outtmpl': get_path + '%(title)s' + get_extension,
                                     'cookiefile': get_cookie,
                                     'embedthumnail': True,
@@ -62,8 +63,8 @@ def Video_Download():
                                     'username': get_username,
                                     'password': get_password
                                     })
-    elif (get_video_name != '') & (writethumbnail == ''):
-        ydl = youtube_dl.YoutubeDL({'format': 'bestaudio/best',
+    elif (get_video_name != '') & (get_extension == ''):
+        ydl = youtube_dl.YoutubeDL({#'format': 'bestaudio/best',
                                     'outtmpl': get_path + get_video_name + '.%(ext)s',
                                     'cookiefile': get_cookie,
                                     'embedthumnail': True,
