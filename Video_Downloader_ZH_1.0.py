@@ -22,6 +22,8 @@ def Video_Download():
                                     'username': get_username,
                                     'password': get_password
                                     })
+    test_a = youtube_dl.YoutubeDL({'listformats': True,})
+    print(test_a)
     try:
         ydl_list = youtube_dl.YoutubeDL({'cookiefile': get_cookie,
                                     'embedthumnail': True,
@@ -33,8 +35,7 @@ def Video_Download():
     except Exception:
         Show_information.insert('end','網址不正確、無影片或不支援\n')
         Show_information.see('end')
-#    if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):
-        
+#    if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):        
     if (get_video_name == '') & (get_extension == ''):
         ydl = youtube_dl.YoutubeDL({#'format': 'bestvideo+bestaudio/best',
                                     'merge-output-format' : 'mp4',
@@ -72,14 +73,20 @@ def Video_Download():
                                     'username': get_username,
                                     'password': get_password
                                     })
-    info = youtube_dl.YoutubeDL().extract_info(get_url,download=False)
-    Show_information.insert('end','影片標題 =' + info.get('title') + '\n')
+    info = youtube_dl.YoutubeDL().extract_info(get_url,download=False)  
     try:
+        cannotdownload_1 = 0
         Show_information.insert('end','Format =' + info.get('format') + '\n')
+        Show_information.insert('end','影片標題 =' + info.get('title') + '\n')
+        Show_information.see('end')
     except TypeError:
+        Show_information.insert('end','無法下載或缺少特殊軟體(ex:ffmpeg等)\n')
+        Show_information.see('end')
+        cannotdownload_1 = 1
         pass
-    Show_information.insert('end','下載中...請稍等...\n')
-    Show_information.see('end')
+    if cannotdownload_1 == 0:
+        Show_information.insert('end','下載中...請稍等...\n')
+        Show_information.see('end')
     if get_url == '':
         Show_information.insert('end','無網址\n')
         Show_information.see('end')
