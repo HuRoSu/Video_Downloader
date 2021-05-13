@@ -80,7 +80,7 @@ def Video_Download():
         Show_information.insert('end','影片標題 =' + info.get('title') + '\n')
         Show_information.see('end')
     except TypeError:
-        Show_information.insert('end','無法下載或缺少特殊軟體(ex:ffmpeg等)\n')
+        Show_information.insert('end','網頁內含有無法下載的影片或缺少特殊軟體(ex:ffmpeg等)\n')
         Show_information.see('end')
         cannotdownload_1 = 1
         pass
