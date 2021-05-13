@@ -72,10 +72,13 @@ def Video_Download():
                                     'password': get_password
                                     })
     info = youtube_dl.YoutubeDL().extract_info(get_url,download=False)
-    Show_information.insert('end','Title =' + info.get('title') + '\n')
     try:
+        Show_information.insert('end','Title =' + info.get('title') + '\n')
         Show_information.insert('end','Format =' + info.get('format') + '\n')
     except TypeError:
+        Show_information.insert('end','Video can not download or lack some software (ex:ffmpeg...)\n')
+        Show_information.insert('end','If site contains multiple videos,will continue to try to download')
+        Show_information.see('end')
         pass
     Show_information.insert('end','Downloading...Waiting...\n')
     Show_information.see('end')
