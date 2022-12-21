@@ -32,12 +32,14 @@ def Video_Download():
                                     'password': get_password
                                     }).extract_info(get_url,download=False)
         print(str(ydl_list).split(' '))
+        cannotdownload_1 = 0
     except Exception:
         Show_information.insert('end','網址不正確、無影片或不支援\n')
+        cannotdownload_1 = 1
         Show_information.see('end')
 #    if (((get_url.split('.'))[1] == "youtube"))|(((get_url.split('/'))[2]=="youtu.be")):        
     if (get_video_name == '') & (get_extension == ''):
-        ydl = youtube_dl.YoutubeDL({#'format': 'bestvideo+bestaudio/best',
+        ydl = youtube_dl.YoutubeDL({'format': 'bestvideo+bestaudio/best',
                                     'merge-output-format' : 'mp4',
                                     'outtmpl': get_path + '%(title)s.%(ext)s',
                                     'cookiefile': get_cookie,
@@ -75,11 +77,13 @@ def Video_Download():
                                     })
     info = youtube_dl.YoutubeDL().extract_info(get_url,download=False)  
     try:
-        cannotdownload_1 = 0
-        Show_information.insert('end','Format =' + info.get('format') + '\n')
-        Show_information.insert('end','影片標題 =' + info.get('title') + '\n')
-        Show_information.see('end')
-    except TypeError:
+        if cannotdownload_1 == 0:
+            Show_information.insert('end','Format =' + info.get('format') + '\n')
+            Show_information.insert('end','影片標題 =' + info.get('title') + '\n')
+            Show_information.see('end')
+        else:
+            pass
+    except:
         Show_information.insert('end','網頁內含有無法下載的影片或缺少特殊軟體(ex:ffmpeg等)\n')
         Show_information.insert('end','若網站含有多個影片也可能發生此error，將會嘗試下載可下載之內容\n')
         Show_information.see('end')
