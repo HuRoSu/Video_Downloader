@@ -187,7 +187,3 @@ Show_information.see('end')
 Show_information.bind("<Button-3>", lambda x: rightKey(x, Show_information))
 
 window.mainloop()
-
-
-#listformats 選擇fotmat
-#更新：Youtube影片可選擇畫質
